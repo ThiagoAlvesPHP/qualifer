@@ -16,8 +16,10 @@ class homeController extends controller {
 	//pagina de produtos por categorias
 	public function produtos($id){
 		if (!empty($id)) {
-			$dados = array();		
+			$dados = array();
+			$cat = new Categorias();		
 
+			$dados['categoria'] = $cat->get($id);
 			$this->loadTemplate('produtos', $dados);
 		} else {
 			header('Location: '.BASE);
@@ -41,6 +43,13 @@ class homeController extends controller {
 		$dados = array();		
 
 		$this->loadTemplate('orcamento', $dados);
+	}
+
+	//menu
+	public function menu(){
+		$dados = array();
+		$dados['categorias'] = (new Categorias())->getAll();
+		$this->loadView('menu', $dados);
 	}
 
 	public function logout(){

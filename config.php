@@ -14,10 +14,10 @@ if (!empty($match)) {
 	$config['dbpass'] = '';
 } else {
 	define("BASE", "https://www.albicod.com/qualifer/");
-	$config['dbname'] = '';
-	$config['host'] = '';
-	$config['dbuser'] = '';
-	$config['dbpass'] = '';
+	$config['dbname'] = 'albicodc_qualifer';
+	$config['host'] = 'localhost';
+	$config['dbuser'] = 'albicodc_admin';
+	$config['dbpass'] = '211085100705';
 }
 
 global $db;

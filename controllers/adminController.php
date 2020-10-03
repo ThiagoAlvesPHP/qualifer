@@ -9,8 +9,18 @@ class adminController extends controller {
 
 	public function index() {
 		$dados = array();		
-
-		$this->loadTemplate('home', $dados);
+		$this->loadTemplate('dashboard', $dados);
+	}
+	//menu
+	public function menuAdmin(){
+		$dados = array();
+		$this->loadView('menuAdmin', $dados);
+	}
+	//cadastro de usuario
+	public function usuario(){
+		$dados = array();	
+			
+		$this->loadTemplate('usuario', $dados);
 	}
 
 	public function logout(){

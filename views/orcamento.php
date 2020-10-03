@@ -1,4 +1,7 @@
-<header>
+<?php $this->menu(); ?>
+<!-- <header>
 	<img src="<?=BASE.'assets/img/produtos/fundo.png'; ?>">
-	
-</header>
+</header> -->
+<div class="container">
+
+</div>

@@ -22,12 +22,15 @@
 				<center>
 					<img class="img-responsive" src="<?=BASE.'assets/img/cabecalho/logo.png'; ?>">
 					<hr>
+					<?php if(!empty($error)): ?>
+						<?=$error; ?>
+					<?php endif; ?>
 				</center>
 				<form method="POST">
-					<label>Login:</label>
-					<input type="text" name="login" autofocus="" class="form-control" required="">
+					<label>Email:</label>
+					<input type="email" name="email" autofocus="" class="form-control" required="">
 					<label>Senha:</label>
-					<input type="password" name="pass" class="form-control" required="">
+					<input type="password" name="senha" class="form-control" required="">
 					<br>
 					<button class="btn btn-success btn-lg btn-block" value="getResponse">Logar</button>
 				</form>

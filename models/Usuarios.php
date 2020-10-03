@@ -1,5 +1,24 @@
 <?php
-class Categorias extends model{
+class Usuarios extends model{
+	//login de usuarios
+	public function login($post){
+		$sql = $this->db->prepare('
+			SELECT id FROM usuarios 
+			WHERE email = :email
+			AND senha = :senha
+			AND status = 1');
+		$sql->bindValue(':email', $post['email']);
+		$sql->bindValue(':senha', md5($post['senha']));
+		$sql->execute();
+
+		if ($sql->rowCount() > 0) {
+			$dados = $sql->fetch(PDO::FETCH_ASSOC);
+			$_SESSION['cLogin'] = $dados['id'];			
+			return true;
+		} else {
+			return false;
+		}
+	}
 	//atualizar configurações
 	public function up($post){
 		$fields = [];

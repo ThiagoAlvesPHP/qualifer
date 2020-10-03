@@ -9,6 +9,18 @@ class loginController extends controller {
 
 	public function index() {
 		$dados = array();
+		$u = new Usuarios();
+
+		$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+		//verifica se foi enviado alguma informação no post
+		if (!empty($post)) {
+		    if ($u->login($post)) {
+				header('Location: '.BASE.'admin');
+			} else {
+				$dados['error'] = '<div class="alert alert-danger">Login e/ou senha incorretos</div>';
+			}
+		}
 
 		$this->loadView('login', $dados);
 	}

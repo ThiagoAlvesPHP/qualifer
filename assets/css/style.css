@@ -1,40 +1,37 @@
 body{
 	/*font-family: Montserrat-Regular;*/
+	background-color: #c0c0c0;
 }
 #menu {
 	height: 80px;
 	margin-top: 30px;
+	z-index: 9999;
 }
 #menu .navbar-right {
-	margin-top: 15px;
+	margin-top: 15px;	
 }
 #menu .navbar-toggle {
 	margin-top: 20px;
 }
 #menu #navbar {
-	background-color: #fff;
+	background-color: #f8f8f8;
 }
-header img {
+/*header img {
 	margin-top: -300px;
 	z-index: 0;
 	width: 100%;
 	height: 100%;
-}
+}*/
 .conteudo {
-	margin-top: -350px;
-	color: #fff;
 	font-size: 18px;
 }
-.color{
-	color: #000;
+/*.color{
+	color: #1E1959;
+}*/
+.btn-contato{
+	background-color: #1A1259;
+	color: #fff;	
 }
-
-@media screen and (min-width: 400px) {
-	header img {
-		margin-top: -300px;
-		height: 1000px;
-	}
-	.conteudo {
-		margin-top: -650px;
-	}
+.btn-contato:hover{
+	color: #c0c0c0;	
 }

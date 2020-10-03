@@ -17,7 +17,5 @@ spl_autoload_register(function($class){
     }
 });
 
-$config['categorias'] = (new Categorias())->getAll();
-
 $core = new Core();
 $core->run();
