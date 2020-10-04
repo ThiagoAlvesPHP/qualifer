@@ -1,5 +1,19 @@
 <?php
 class Produtos extends model{
+	//cadastrar produtos
+	public function set($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("INSERT INTO produtos SET {$fields}");
+
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
+	}
 	//atualizar configurações
 	public function up($post){
 		$fields = [];
@@ -16,7 +30,14 @@ class Produtos extends model{
 	}
 	//selecionar todas as categorias
 	public function getAll(){
-		$sql = $this->db->query("SELECT * FROM produtos");
+		$sql = $this->db->query("
+			SELECT 
+			produtos.*, 
+			categorias.nome as categoria 
+			FROM produtos
+			INNER JOIN categorias
+			ON produtos.id_categoria = categorias.id
+			");
 		return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 	//selecionar configurações

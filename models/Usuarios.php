@@ -24,6 +24,7 @@ class Usuarios extends model{
 		$sql = $this->db->query("SELECT * FROM usuarios WHERE email = '{$post['email']}' ");
 
 		if ($sql->rowCount() == 0) {
+			$post['senha'] = md5($post['senha']);
 			$fields = [];
 	        foreach ($post as $key => $value) {
 	            $fields[] = "$key=:$key";
@@ -43,6 +44,12 @@ class Usuarios extends model{
 	}
 	//atualizar configurações
 	public function up($post){
+		//se senha estiver vazio remove
+		if (empty($post['senha'])) {
+			unset($post['senha']);
+		} else {
+			$post['senha'] = md5($post['senha']);
+		}
 		$fields = [];
         foreach ($post as $key => $value) {
             $fields[] = "$key=:$key";
