@@ -38,10 +38,10 @@
           <a href="<?=BASE.'home/contato'; ?>" class="dropdown-toggle link">CONTATO</a>
         </li>
         <li class="dropdown li">
-          <a href="<?=BASE.'home/orcamento'; ?>" class="dropdown-toggle link">ORÇAMENTO</a>
-        </li>
-        <li class="dropdown li">
-          <a><img width="20" src="<?=BASE.'assets/img/cabecalho/calc.png'; ?>"></a>
+          <a href="<?=BASE.'home/orcamento'; ?>" class="dropdown-toggle link">
+            ORÇAMENTO
+            <img width="20" src="<?=BASE.'assets/img/cabecalho/calc.png'; ?>">
+          </a>
         </li>
         <li class="dropdown li">
           <a href=""><img width="20" src="<?=BASE.'assets/img/cabecalho/search.png'; ?>"></a>

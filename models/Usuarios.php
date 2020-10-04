@@ -19,6 +19,28 @@ class Usuarios extends model{
 			return false;
 		}
 	}
+	//cadastrar usuarios
+	public function set($post){
+		$sql = $this->db->query("SELECT * FROM usuarios WHERE email = '{$post['email']}' ");
+
+		if ($sql->rowCount() == 0) {
+			$fields = [];
+	        foreach ($post as $key => $value) {
+	            $fields[] = "$key=:$key";
+	        }
+	        $fields = implode(', ', $fields);
+			$sql = $this->db->prepare("INSERT INTO usuarios SET {$fields}");
+
+			foreach ($post as $key => $value) {
+	            $sql->bindValue(":{$key}", $value);
+	        }
+			$sql->execute();
+
+			return true;
+		} else {
+			return false;
+		}
+	}
 	//atualizar configurações
 	public function up($post){
 		$fields = [];
@@ -26,21 +48,21 @@ class Usuarios extends model{
             $fields[] = "$key=:$key";
         }
         $fields = implode(', ', $fields);
-		$sql = $this->db->prepare("UPDATE config SET {$fields}");
+		$sql = $this->db->prepare("UPDATE usuarios SET {$fields} WHERE id = '{$post['id']}' ");
 
 		foreach ($post as $key => $value) {
             $sql->bindValue(":{$key}", $value);
         }
 		$sql->execute();
 	}
-	//selecionar todas as categorias
+	//selecionar todas os usuarios
 	public function getAll(){
-		$sql = $this->db->query("SELECT * FROM categorias");
+		$sql = $this->db->query("SELECT * FROM usuarios");
 		return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
-	//selecionar configurações
+	//selecionar usuario
 	public function get($id){
-		$sql = $this->db->query("SELECT * FROM categorias WHERE id = '{$id}' ");
+		$sql = $this->db->query("SELECT * FROM usuarios WHERE id = '{$id}' ");
 		return $sql->fetch(PDO::FETCH_ASSOC);
 	}
 

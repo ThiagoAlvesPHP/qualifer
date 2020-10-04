@@ -17,15 +17,28 @@ class homeController extends controller {
 	public function produtos($id){
 		if (!empty($id)) {
 			$dados = array();
-			$cat = new Categorias();		
+			$cat = new Categorias();
+			$pro = new Produtos();		
 
 			$dados['categoria'] = $cat->get($id);
+			$dados['produtos'] = $pro->getAllProdutos($id);
 			$this->loadTemplate('produtos', $dados);
 		} else {
 			header('Location: '.BASE);
 		}
 	}
+	//pagina de produto selecionado
+	public function produto($id){
+		if (!empty($id)) {
+			$dados = array();
+			$pro = new Produtos();		
 
+			$dados['produto'] = $pro->get($id);
+			$this->loadTemplate('produto', $dados);
+		} else {
+			header('Location: '.BASE);
+		}
+	}
 	//pagina servico
 	public function servico(){
 		$dados = array();		

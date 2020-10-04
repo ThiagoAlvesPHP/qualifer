@@ -18,9 +18,25 @@ class adminController extends controller {
 	}
 	//cadastro de usuario
 	public function usuario(){
-		$dados = array();	
-			
+		$dados = array();
+		$u = new Usuarios();	
+		$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+		//cadastrar usuarios
+		if (!empty($post)) {
+			if ($u->set($post)) {
+				header('Location: '.BASE.'admin/usuario');
+			} else {
+				$dados['error'] = true;
+			}
+		}
 		$this->loadTemplate('usuario', $dados);
+	}
+	public function usuarios_lista(){
+		$dados = array();
+		$u = new Usuarios();	
+		
+		$dados['lista'] = $u->getAll();
+		$this->loadTemplate('usuarios_lista', $dados);
 	}
 
 	public function logout(){
