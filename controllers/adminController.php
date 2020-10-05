@@ -6,12 +6,12 @@ class adminController extends controller {
 			header('Location: '.BASE.'login');
 		}
 	}
-
+	//dachboard
 	public function index() {
 		$dados = array();		
 		$this->loadTemplate('dashboard', $dados);
 	}
-	//menu
+	//menu administrativo
 	public function menuAdmin(){
 		$dados = array();
 		$u = new Usuarios();
@@ -155,18 +155,40 @@ class adminController extends controller {
 	public function produtos_up($id){
 		if (!empty($id)) {
 			$dados = array();
+			$p = new Produtos();	
 			$c = new Categorias();	
+			$i = new Imagem();
+			
+			$dados['produto'] = $p->get($id);
+			$dados['categorias'] = $c->getAll();
 
 			$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-			//cadastrar usuarios
+			//atualizar produto
 			if (!empty($post)) {
 				$post['id'] = $id;
-				$c->up($post);
-				header('Location: '.BASE.'admin/categorias_up/'.$id);
+				//verificando se imagem esta preenchida
+				if (!empty($_FILES['imagem']['name'])) {
+					//se a imagem for em png
+					if ($_FILES['imagem']['type'] == 'image/png') {
+						$url = 'assets/img/produtos/';
+						if (file_exists($url.$dados['produto']['imagem'])) {
+							unlink($url.$dados['produto']['imagem']);
+						}
+						$imagem = md5($_FILES['imagem']['tmp_name'].time().rand(0,999)).'.png';
+						$post['imagem'] = $imagem;
+						$i->png(600, 600, $url, $imagem);
+						$p->up($post);
+						header('Location: '.BASE.'admin/produtos_up/'.$id);
+					} else {
+						$dados['error'] = true;
+					}
+				} else {
+					$p->up($post);
+					header('Location: '.BASE.'admin/produtos_up/'.$id);
+				}
 			}
 
-			$dados['get'] = $c->get($id);
-			$this->loadTemplate('categorias_up', $dados);
+			$this->loadTemplate('produtos_up', $dados);
 		} else {
 			header('Location: '.BASE.'admin');
 		}
